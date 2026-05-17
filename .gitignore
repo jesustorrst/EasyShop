@@ -1,0 +1,15 @@
+bin/
+obj/
+*.user
+.vs/
+.vscode/
+appsettings.Development.json
+Debug/
+Release/
+
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+.DS_Store
