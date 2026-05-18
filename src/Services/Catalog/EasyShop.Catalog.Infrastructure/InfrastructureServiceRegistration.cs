@@ -36,9 +36,10 @@ public static class InfrastructureServiceRegistration
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
 
+
         //mongo
         services.AddScoped<IProductReadRepository, ProductReadRepository>();
-
+        services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
 
         //services
         services.AddScoped<IProductWriteToReadService, ProductWriteToReadService>();

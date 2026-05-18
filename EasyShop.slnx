@@ -7,4 +7,10 @@
     <Project Path="src/Services/Catalog/EasyShop.Catalog.Domain/EasyShop.Catalog.Domain.csproj" />
     <Project Path="src/Services/Catalog/EasyShop.Catalog.Infrastructure/EasyShop.Catalog.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Services/Identity/">
+    <Project Path="src/Services/Identity/EasyShop.Identity.API/EasyShop.Identity.API.csproj" />
+    <Project Path="src/Services/Identity/EasyShop.Identity.Application/EasyShop.Identity.Application.csproj" />
+    <Project Path="src/Services/Identity/EasyShop.Identity.Domain/EasyShop.Identity.Domain.csproj" />
+    <Project Path="src/Services/Identity/EasyShop.Identity.Infrastructure/EasyShop.Identity.Infrastructure.csproj" />
+  </Folder>
 </Solution>

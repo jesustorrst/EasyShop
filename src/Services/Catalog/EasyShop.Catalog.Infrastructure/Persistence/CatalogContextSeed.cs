@@ -7,6 +7,10 @@ public class CatalogContextSeed
 {
     public static async Task SeedAsync(CatalogDbContext context, ILogger<CatalogContextSeed> logger)
     {
+
+        // var electronicaId = Guid.Parse("5790f326-6420-4413-b75d-294be5a1df04");
+        // var hogarCocinaId = Guid.Parse("de61c1ad-f03e-4acc-a99e-cf93439f2850");
+
         if (!context.Categories.Any())
         {
             var categories = new List<Category>

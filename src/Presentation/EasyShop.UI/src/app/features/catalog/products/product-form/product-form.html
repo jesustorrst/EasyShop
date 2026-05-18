@@ -1,1 +1,71 @@
-<p>product-form works!</p>
+<div class="form-container">
+  <header class="form-header">
+    <h2>Producto</h2>
+    <p>Ingresa los datos del producto</p>
+  </header>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="modern-form">
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input id="name" formControlName="name" type="text" placeholder="Nombre del producto" />
+      <!-- <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
+                El nombre es requerido.
+            </div> -->
+      @if (isFieldInvalid('name')) {
+        <small class="error-message">El nombre es obligatorio (mínimo 3 caracteres).</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Descripción del producto"
+      ></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Precio (MXN) *</label>
+        <input
+          type="number"
+          id="price"
+          formControlName="price"
+          step="0.01"
+          [class.input-error]="isFieldInvalid('price')"
+        />
+        @if (isFieldInvalid('price')) {
+          <small class="error-message">El precio debe ser mayor a $0.00.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="categoryId">Categoría *</label>
+        <select
+          id="categoryId"
+          formControlName="categoryId"
+          [class.input-error]="isFieldInvalid('categoryId')"
+        >
+          <option value="" disabled selected>Selecciona una categoría...</option>
+
+          @for (category of categories(); track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+
+        @if (isFieldInvalid('categoryId')) {
+          <small class="error-message">Debes seleccionar una categoría válida.</small>
+        }
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/catalogo/productos" class="btn-secondary">Cancelar</a>
+      <button type="submit" class="btn-primary" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Guardando...' : 'Crear Producto' }}
+      </button>
+    </div>
+  </form>
+  <div></div>
+</div>

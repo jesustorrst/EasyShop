@@ -55,7 +55,12 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 
 [sourceFiles]
 ApplicationServiceRegistration.cs
-DTOs/ProductDto.cs
+DTOs/
+ CategoryDto.cs
+ ProductDto.cs
+Features/Categories/Queries/GetCategoryList/
+ GetCategoryListHandler.cs
+ GetCategoryListQuery.cs
 Features/Products/Commands/CreateProduct/
  CreateProductCommand.cs
  CreateProductHandler.cs
@@ -78,6 +83,7 @@ Features/Products/Queries/GetProductList/
  GetProductListHandler.cs
  GetProductListQuery.cs
 Interfaces/
+ ICategoryReadRepository.cs
  IGenericRepository.cs
  IProductReadRepository.cs
  IProductWriteRepository.cs

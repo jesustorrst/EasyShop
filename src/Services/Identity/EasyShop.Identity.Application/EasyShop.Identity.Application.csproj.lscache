@@ -13,18 +13,18 @@ primary
 lastDtbSucceeded
 
 [properties]
-AssemblyName=EasyShop.Catalog.Infrastructure
+AssemblyName=EasyShop.Identity.Application
 CommandLineArgsForDesignTimeEvaluation=-langversion:14.0 -define:TRACE
 CompilerGeneratedFilesOutputPath=
 MaxSupportedLangVersion=14.0
 ProjectAssetsFile=<PATH>obj/project.assets.json
-RootNamespace=EasyShop.Catalog.Infrastructure
+RootNamespace=EasyShop.Identity.Application
 RunAnalyzers=
 RunAnalyzersDuringLiveAnalysis=
 SolutionPath=<PATH>../../../../EasyShop.slnx
 TargetFrameworkIdentifier=.NETCoreApp
-TargetPath=<PATH>bin/Debug/net10.0/EasyShop.Catalog.Infrastructure.dll
-TargetRefPath=<PATH>obj/Debug/net10.0/ref/EasyShop.Catalog.Infrastructure.dll
+TargetPath=<PATH>bin/Debug/net10.0/EasyShop.Identity.Application.dll
+TargetRefPath=<PATH>obj/Debug/net10.0/ref/EasyShop.Identity.Application.dll
 TemporaryDependencyNodeTargetIdentifier=net10.0
 
 [commandLineArguments]
@@ -44,8 +44,8 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /debug:portable
 /filealign:512
 /optimize-
-/out:obj/Debug/net10.0/EasyShop.Catalog.Infrastructure.dll
-/refout:obj/Debug/net10.0/refint/EasyShop.Catalog.Infrastructure.dll
+/out:obj/Debug/net10.0/EasyShop.Identity.Application.dll
+/refout:obj/Debug/net10.0/refint/EasyShop.Identity.Application.dll
 /target:library
 /warnaserror-
 /utf8output
@@ -54,32 +54,13 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
-InfrastructureServiceRegistration.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
- EasyShop.Catalog.Infrastructure.AssemblyInfo.cs
- EasyShop.Catalog.Infrastructure.GlobalUsings.g.cs
-Persistence/
- CatalogContextSeed.cs
- CatalogDbContext.cs
- Migrations/
-  20260511184749_InitialMigration.cs
-  20260511184749_InitialMigration.Designer.cs
-  CatalogDbContextModelSnapshot.cs
- MongoDbContext.cs
-Repositories/
- CategoryReadRepository.cs
- GenericMongoRepository.cs
- GenericRepository.cs
- ProductoWriteRepository.cs
- ProductReadRepository.cs
-Services/ProductWriteToReadService.cs
-Settings/MongoDbSettings.cs
+ EasyShop.Identity.Application.AssemblyInfo.cs
+ EasyShop.Identity.Application.GlobalUsings.g.cs
 
 [metadataReferences]
-../
- EasyShop.Catalog.Application/obj/Debug/net10.0/ref/EasyShop.Catalog.Application.dll
- EasyShop.Catalog.Domain/obj/Debug/net10.0/ref/EasyShop.Catalog.Domain.dll
+../EasyShop.Identity.Domain/obj/Debug/net10.0/ref/EasyShop.Identity.Domain.dll
 <DOTNET>/packs/Microsoft.NETCore.App.Ref/10.0.2/ref/net10.0/
  Microsoft.CSharp.dll
  Microsoft.VisualBasic.Core.dll
@@ -249,56 +230,23 @@ Settings/MongoDbSettings.cs
  System.Xml.XPath.XDocument.dll
  WindowsBase.dll
 <NUGET>/
- azure.core/1.47.1/lib/net8.0/Azure.Core.dll
- azure.identity/1.14.2/lib/net8.0/Azure.Identity.dll
- dnsclient/1.6.1/lib/net5.0/DnsClient.dll
- fluentvalidation.dependencyinjectionextensions/12.1.1/lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll
- fluentvalidation/12.1.1/lib/net8.0/FluentValidation.dll
- masstransit.abstractions/8.1.2/lib/net7.0/MassTransit.Abstractions.dll
- masstransit.rabbitmq/8.1.2/lib/net7.0/MassTransit.RabbitMqTransport.dll
- masstransit/8.1.2/lib/net7.0/MassTransit.dll
- mediatr.contracts/2.0.1/lib/netstandard2.0/MediatR.Contracts.dll
- mediatr/14.1.0/lib/net10.0/MediatR.dll
- microsoft.bcl.asyncinterfaces/8.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll
- microsoft.bcl.cryptography/9.0.4/lib/net9.0/Microsoft.Bcl.Cryptography.dll
- microsoft.data.sqlclient/6.1.1/ref/net9.0/Microsoft.Data.SqlClient.dll
- microsoft.entityframeworkcore.abstractions/10.0.7/lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll
- microsoft.entityframeworkcore.relational/10.0.7/lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll
- microsoft.entityframeworkcore.sqlserver/10.0.7/lib/net10.0/Microsoft.EntityFrameworkCore.SqlServer.dll
- microsoft.entityframeworkcore/10.0.7/lib/net10.0/Microsoft.EntityFrameworkCore.dll
- microsoft.extensions.caching.abstractions/10.0.7/lib/net10.0/Microsoft.Extensions.Caching.Abstractions.dll
- microsoft.extensions.caching.memory/10.0.7/lib/net10.0/Microsoft.Extensions.Caching.Memory.dll
- microsoft.extensions.configuration.abstractions/10.0.7/lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll
- microsoft.extensions.dependencyinjection.abstractions/10.0.7/lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
- microsoft.extensions.dependencyinjection/10.0.7/lib/net10.0/Microsoft.Extensions.DependencyInjection.dll
- microsoft.extensions.diagnostics.healthchecks.abstractions/7.0.1/lib/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
- microsoft.extensions.diagnostics.healthchecks/7.0.1/lib/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
- microsoft.extensions.fileproviders.abstractions/7.0.0/lib/net7.0/Microsoft.Extensions.FileProviders.Abstractions.dll
- microsoft.extensions.hosting.abstractions/7.0.0/lib/net7.0/Microsoft.Extensions.Hosting.Abstractions.dll
- microsoft.extensions.logging.abstractions/10.0.7/lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll
- microsoft.extensions.logging/10.0.7/lib/net10.0/Microsoft.Extensions.Logging.dll
- microsoft.extensions.options/10.0.7/lib/net10.0/Microsoft.Extensions.Options.dll
- microsoft.extensions.primitives/10.0.7/lib/net10.0/Microsoft.Extensions.Primitives.dll
- microsoft.identity.client.extensions.msal/4.73.1/lib/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll
- microsoft.identity.client/4.73.1/lib/net8.0/Microsoft.Identity.Client.dll
- microsoft.identitymodel.abstractions/8.14.0/lib/net9.0/Microsoft.IdentityModel.Abstractions.dll
- microsoft.identitymodel.jsonwebtokens/8.14.0/lib/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
- microsoft.identitymodel.logging/8.14.0/lib/net9.0/Microsoft.IdentityModel.Logging.dll
- microsoft.identitymodel.protocols.openidconnect/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
- microsoft.identitymodel.protocols/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.dll
- microsoft.identitymodel.tokens/8.14.0/lib/net9.0/Microsoft.IdentityModel.Tokens.dll
- microsoft.sqlserver.server/1.0.0/lib/netstandard2.0/Microsoft.SqlServer.Server.dll
- mongodb.bson/3.8.0/lib/net6.0/MongoDB.Bson.dll
- mongodb.driver/3.8.0/lib/net6.0/MongoDB.Driver.dll
- rabbitmq.client/6.6.0/lib/netstandard2.0/RabbitMQ.Client.dll
- sharpcompress/0.30.1/lib/net5.0/SharpCompress.dll
- snappier/1.0.0/lib/net5.0/Snappier.dll
- system.clientmodel/1.5.1/lib/net8.0/System.ClientModel.dll
- system.identitymodel.tokens.jwt/7.7.1/lib/net8.0/System.IdentityModel.Tokens.Jwt.dll
- system.memory.data/8.0.1/lib/net8.0/System.Memory.Data.dll
- system.security.cryptography.pkcs/9.0.4/lib/net9.0/System.Security.Cryptography.Pkcs.dll
- system.security.cryptography.protecteddata/9.0.4/lib/net9.0/System.Security.Cryptography.ProtectedData.dll
- zstdsharp.port/0.7.3/lib/net7.0/ZstdSharp.dll
+ microsoft.aspnetcore.cryptography.internal/10.0.8/lib/net10.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+ microsoft.aspnetcore.cryptography.keyderivation/10.0.8/lib/net10.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+ microsoft.extensions.caching.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Caching.Abstractions.dll
+ microsoft.extensions.configuration.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll
+ microsoft.extensions.configuration.binder/10.0.8/lib/net10.0/Microsoft.Extensions.Configuration.Binder.dll
+ microsoft.extensions.configuration/10.0.8/lib/net10.0/Microsoft.Extensions.Configuration.dll
+ microsoft.extensions.dependencyinjection.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+ microsoft.extensions.dependencyinjection/10.0.8/lib/net10.0/Microsoft.Extensions.DependencyInjection.dll
+ microsoft.extensions.diagnostics.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+ microsoft.extensions.diagnostics/10.0.8/lib/net10.0/Microsoft.Extensions.Diagnostics.dll
+ microsoft.extensions.identity.core/10.0.8/lib/net10.0/Microsoft.Extensions.Identity.Core.dll
+ microsoft.extensions.identity.stores/10.0.8/lib/net10.0/Microsoft.Extensions.Identity.Stores.dll
+ microsoft.extensions.logging.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll
+ microsoft.extensions.logging/10.0.8/lib/net10.0/Microsoft.Extensions.Logging.dll
+ microsoft.extensions.options.configurationextensions/10.0.8/lib/net10.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll
+ microsoft.extensions.options/10.0.8/lib/net10.0/Microsoft.Extensions.Options.dll
+ microsoft.extensions.primitives/10.0.8/lib/net10.0/Microsoft.Extensions.Primitives.dll
 
 [analyzerReferences]
 <DOTNET>/packs/Microsoft.NETCore.App.Ref/10.0.2/analyzers/dotnet/cs/
@@ -311,15 +259,10 @@ Settings/MongoDbSettings.cs
 <DOTNET>/sdk/10.0.102/Sdks/Microsoft.NET.Sdk/analyzers/
  Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll
  Microsoft.CodeAnalysis.NetAnalyzers.dll
-<NUGET>/microsoft.codeanalysis.analyzers/3.11.0/analyzers/dotnet/cs/
- Microsoft.CodeAnalysis.Analyzers.dll
- Microsoft.CodeAnalysis.CSharp.Analyzers.dll
 <NUGET>/
- microsoft.entityframeworkcore.analyzers/10.0.7/analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll
- microsoft.extensions.logging.abstractions/10.0.7/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Logging.Generators.dll
- microsoft.extensions.options/10.0.7/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Options.SourceGeneration.dll
- system.clientmodel/1.5.1/analyzers/dotnet/cs/System.ClientModel.SourceGeneration.dll
+ microsoft.extensions.logging.abstractions/10.0.8/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Logging.Generators.dll
+ microsoft.extensions.options/10.0.8/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Options.SourceGeneration.dll
 
 [analyzerConfigFiles]
 <DOTNET>/sdk/10.0.102/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_10_default.globalconfig
-obj/Debug/net10.0/EasyShop.Catalog.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+obj/Debug/net10.0/EasyShop.Identity.Application.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,1 +1,38 @@
-<p>product-list works!</p>
+<div class="list-container">
+  <header class="list-header">
+    <div class="header-title-container">
+      <h2>Catálogo de Productos</h2>
+      <p>Explora los productos disponibles en EasyShop</p>
+    </div>
+    <a routerLink="/catalogo/productos/add" class="btn-add-product" title="Crear un nuevo producto">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="btn-icon"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Agregar Producto
+    </a>
+  </header>
+
+  @if (productService.loading()) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Cargando catálogo...</p>
+    </div>
+  } @else {
+    <div class="products-grid">
+      @for (item of productService.products(); track item.id) {
+        <app-product-card [product]="item" />
+      } @empty {
+        <div class="empty-state">
+          <p>No se encontraron productos disponibles en este momento.</p>
+        </div>
+      }
+    </div>
+  }
+</div>
