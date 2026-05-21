@@ -55,6 +55,7 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
+Controllers/AuthController.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
  EasyShop.Identity.API.AssemblyInfo.cs
@@ -389,16 +390,19 @@ Program.cs
  microsoft.entityframeworkcore/10.0.8/lib/net10.0/Microsoft.EntityFrameworkCore.dll
  microsoft.identity.client.extensions.msal/4.73.1/lib/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll
  microsoft.identity.client/4.73.1/lib/net8.0/Microsoft.Identity.Client.dll
- microsoft.identitymodel.abstractions/7.7.1/lib/net8.0/Microsoft.IdentityModel.Abstractions.dll
- microsoft.identitymodel.jsonwebtokens/7.7.1/lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
- microsoft.identitymodel.logging/7.7.1/lib/net8.0/Microsoft.IdentityModel.Logging.dll
+ microsoft.identitymodel.abstractions/8.18.0/lib/net10.0/Microsoft.IdentityModel.Abstractions.dll
+ microsoft.identitymodel.jsonwebtokens/8.18.0/lib/net10.0/Microsoft.IdentityModel.JsonWebTokens.dll
+ microsoft.identitymodel.logging/8.18.0/lib/net10.0/Microsoft.IdentityModel.Logging.dll
  microsoft.identitymodel.protocols.openidconnect/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
  microsoft.identitymodel.protocols/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.dll
- microsoft.identitymodel.tokens/7.7.1/lib/net8.0/Microsoft.IdentityModel.Tokens.dll
- microsoft.openapi/2.0.0/lib/net8.0/Microsoft.OpenApi.dll
+ microsoft.identitymodel.tokens/8.18.0/lib/net10.0/Microsoft.IdentityModel.Tokens.dll
+ microsoft.openapi/2.4.1/lib/net8.0/Microsoft.OpenApi.dll
  microsoft.sqlserver.server/1.0.0/lib/netstandard2.0/Microsoft.SqlServer.Server.dll
+ swashbuckle.aspnetcore.swagger/10.1.7/lib/net10.0/Swashbuckle.AspNetCore.Swagger.dll
+ swashbuckle.aspnetcore.swaggergen/10.1.7/lib/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+ swashbuckle.aspnetcore.swaggerui/10.1.7/lib/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
  system.clientmodel/1.5.1/lib/net8.0/System.ClientModel.dll
- system.identitymodel.tokens.jwt/7.7.1/lib/net8.0/System.IdentityModel.Tokens.Jwt.dll
+ system.identitymodel.tokens.jwt/8.18.0/lib/net10.0/System.IdentityModel.Tokens.Jwt.dll
  system.memory.data/8.0.1/lib/net8.0/System.Memory.Data.dll
  system.security.cryptography.pkcs/9.0.4/lib/net9.0/System.Security.Cryptography.Pkcs.dll
  system.security.cryptography.protecteddata/9.0.4/lib/net9.0/System.Security.Cryptography.ProtectedData.dll
@@ -431,6 +435,9 @@ Program.cs
  Microsoft.CodeAnalysis.NetAnalyzers.dll
 <NUGET>/
  microsoft.aspnetcore.openapi/10.0.2/analyzers/dotnet/cs/Microsoft.AspNetCore.OpenApi.SourceGenerators.dll
+ microsoft.codeanalysis.analyzers/3.11.0/analyzers/dotnet/cs/
+  Microsoft.CodeAnalysis.Analyzers.dll
+  Microsoft.CodeAnalysis.CSharp.Analyzers.dll
  microsoft.entityframeworkcore.analyzers/10.0.8/analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll
  system.clientmodel/1.5.1/analyzers/dotnet/cs/System.ClientModel.SourceGeneration.dll
 

@@ -4,7 +4,7 @@ using EasyShop.Catalog.Application.Features.Products.Commands.CreateProduct;
 using EasyShop.Catalog.Application.Features.Products.Queries.GetProductById;
 using EasyShop.Catalog.Application.Features.Products.Commands.UpdateProduct;
 using EasyShop.Catalog.Application.Features.Products.Commands.DeleteProduct;
-
+using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +12,7 @@ namespace EasyShop.Catalog.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[Authorize]
 public class ProductController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -33,14 +34,13 @@ public class ProductController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<ProductDto>>> GetProducts()
     {
-        Console.WriteLine("=== GET Products llamado ===");
-
         var query = new GetProductListQuery();
         var result = await _mediator.Send(query);
         return Ok(result);
     }
 
     [HttpPost]
+    [ServiceFilter(typeof(ValidarModeloFilter))]
     public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] CreateProductDto createProductDto)
     {
         var command = new CreateProductCommand(createProductDto);

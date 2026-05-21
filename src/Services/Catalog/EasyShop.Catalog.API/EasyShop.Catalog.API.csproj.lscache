@@ -58,6 +58,7 @@ TemporaryDependencyNodeTargetIdentifier=net10.0
 Controllers/
  CategoryController.cs
  ProductController.cs
+Filters/ValidarModeloFilter.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
  EasyShop.Catalog.API.AssemblyInfo.cs
@@ -390,6 +391,7 @@ Program.cs
  mediatr.contracts/2.0.1/lib/netstandard2.0/MediatR.Contracts.dll
  mediatr.extensions.microsoft.dependencyinjection/11.1.0/lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll
  mediatr/14.1.0/lib/net10.0/MediatR.dll
+ microsoft.aspnetcore.authentication.jwtbearer/10.0.8/lib/net10.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
  microsoft.aspnetcore.openapi/10.0.2/lib/net10.0/Microsoft.AspNetCore.OpenApi.dll
  microsoft.bcl.asyncinterfaces/8.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll
  microsoft.bcl.cryptography/9.0.4/lib/net9.0/Microsoft.Bcl.Cryptography.dll
@@ -403,10 +405,10 @@ Program.cs
  microsoft.identitymodel.abstractions/8.14.0/lib/net9.0/Microsoft.IdentityModel.Abstractions.dll
  microsoft.identitymodel.jsonwebtokens/8.14.0/lib/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
  microsoft.identitymodel.logging/8.14.0/lib/net9.0/Microsoft.IdentityModel.Logging.dll
- microsoft.identitymodel.protocols.openidconnect/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
- microsoft.identitymodel.protocols/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.dll
+ microsoft.identitymodel.protocols.openidconnect/8.0.1/lib/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+ microsoft.identitymodel.protocols/8.0.1/lib/net9.0/Microsoft.IdentityModel.Protocols.dll
  microsoft.identitymodel.tokens/8.14.0/lib/net9.0/Microsoft.IdentityModel.Tokens.dll
- microsoft.openapi/2.4.1/lib/net8.0/Microsoft.OpenApi.dll
+ microsoft.openapi/3.5.3/lib/net8.0/Microsoft.OpenApi.dll
  microsoft.sqlserver.server/1.0.0/lib/netstandard2.0/Microsoft.SqlServer.Server.dll
  mongodb.bson/3.8.0/lib/net6.0/MongoDB.Bson.dll
  mongodb.driver/3.8.0/lib/net6.0/MongoDB.Driver.dll
@@ -417,7 +419,7 @@ Program.cs
  swashbuckle.aspnetcore.swaggergen/10.1.7/lib/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
  swashbuckle.aspnetcore.swaggerui/10.1.7/lib/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
  system.clientmodel/1.5.1/lib/net8.0/System.ClientModel.dll
- system.identitymodel.tokens.jwt/7.7.1/lib/net8.0/System.IdentityModel.Tokens.Jwt.dll
+ system.identitymodel.tokens.jwt/8.0.1/lib/net9.0/System.IdentityModel.Tokens.Jwt.dll
  system.memory.data/8.0.1/lib/net8.0/System.Memory.Data.dll
  system.security.cryptography.pkcs/9.0.4/lib/net9.0/System.Security.Cryptography.Pkcs.dll
  system.security.cryptography.protecteddata/9.0.4/lib/net9.0/System.Security.Cryptography.ProtectedData.dll

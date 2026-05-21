@@ -1,6 +1,9 @@
 using EasyShop.Catalog.Application;
 using EasyShop.Catalog.Infrastructure;
 using EasyShop.Catalog.Infrastructure.Persistence;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,29 +11,43 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 
-builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options =>
+var secretKey = builder.Configuration["JwtSettings:Secret"]
+    ?? throw new InvalidOperationException("La clave secreta del JWT no está configurada.");
+
+builder.Services.AddAuthentication(options =>
 {
-    options.AddPolicy("AllowAngular", policy =>
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
 });
-
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
+
+    // app.MapOpenApi();
 }
 app.UseCors("AllowAngular");
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 

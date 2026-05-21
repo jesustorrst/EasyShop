@@ -59,7 +59,15 @@ obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
  EasyShop.Identity.Infrastructure.AssemblyInfo.cs
  EasyShop.Identity.Infrastructure.GlobalUsings.g.cs
-Persistence/AppIdentityDbContext.cs
+Persistence/
+ AppIdentityDbContext.cs
+ AppIdentityDbContextFactory.cs
+ AppIdentityDbContextSeed.cs
+ Migrations/
+  20260520000602_InicialIdentity.cs
+  20260520000602_InicialIdentity.Designer.cs
+  AppIdentityDbContextModelSnapshot.cs
+Services/JwtTokenGenerator.cs
 
 [metadataReferences]
 ../
@@ -236,9 +244,23 @@ Persistence/AppIdentityDbContext.cs
 <NUGET>/
  azure.core/1.47.1/lib/net8.0/Azure.Core.dll
  azure.identity/1.14.2/lib/net8.0/Azure.Identity.dll
+ microsoft.aspnetcore.authentication.abstractions/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Abstractions.dll
+ microsoft.aspnetcore.authentication.cookies/2.3.9/lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.dll
+ microsoft.aspnetcore.authentication.core/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.dll
+ microsoft.aspnetcore.authentication/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Authentication.dll
  microsoft.aspnetcore.cryptography.internal/10.0.8/lib/net10.0/Microsoft.AspNetCore.Cryptography.Internal.dll
  microsoft.aspnetcore.cryptography.keyderivation/10.0.8/lib/net10.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+ microsoft.aspnetcore.dataprotection.abstractions/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.Abstractions.dll
+ microsoft.aspnetcore.dataprotection/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.dll
+ microsoft.aspnetcore.hosting.abstractions/2.3.9/lib/netstandard2.0/Microsoft.AspNetCore.Hosting.Abstractions.dll
+ microsoft.aspnetcore.hosting.server.abstractions/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+ microsoft.aspnetcore.http.abstractions/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll
+ microsoft.aspnetcore.http.extensions/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Http.Extensions.dll
+ microsoft.aspnetcore.http.features/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll
+ microsoft.aspnetcore.http/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.Http.dll
  microsoft.aspnetcore.identity.entityframeworkcore/10.0.8/lib/net10.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+ microsoft.aspnetcore.identity/2.3.10/lib/netstandard2.0/Microsoft.AspNetCore.Identity.dll
+ microsoft.aspnetcore.webutilities/2.3.0/lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll
  microsoft.bcl.asyncinterfaces/8.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll
  microsoft.bcl.cryptography/9.0.4/lib/net9.0/Microsoft.Bcl.Cryptography.dll
  microsoft.data.sqlclient/6.1.1/ref/net9.0/Microsoft.Data.SqlClient.dll
@@ -255,27 +277,33 @@ Persistence/AppIdentityDbContext.cs
  microsoft.extensions.dependencyinjection/10.0.8/lib/net10.0/Microsoft.Extensions.DependencyInjection.dll
  microsoft.extensions.diagnostics.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
  microsoft.extensions.diagnostics/10.0.8/lib/net10.0/Microsoft.Extensions.Diagnostics.dll
+ microsoft.extensions.fileproviders.abstractions/8.0.0/lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+ microsoft.extensions.hosting.abstractions/8.0.1/lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll
  microsoft.extensions.identity.core/10.0.8/lib/net10.0/Microsoft.Extensions.Identity.Core.dll
  microsoft.extensions.identity.stores/10.0.8/lib/net10.0/Microsoft.Extensions.Identity.Stores.dll
  microsoft.extensions.logging.abstractions/10.0.8/lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll
  microsoft.extensions.logging/10.0.8/lib/net10.0/Microsoft.Extensions.Logging.dll
+ microsoft.extensions.objectpool/8.0.11/lib/net8.0/Microsoft.Extensions.ObjectPool.dll
  microsoft.extensions.options.configurationextensions/10.0.8/lib/net10.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll
  microsoft.extensions.options/10.0.8/lib/net10.0/Microsoft.Extensions.Options.dll
  microsoft.extensions.primitives/10.0.8/lib/net10.0/Microsoft.Extensions.Primitives.dll
+ microsoft.extensions.webencoders/8.0.11/lib/net8.0/Microsoft.Extensions.WebEncoders.dll
  microsoft.identity.client.extensions.msal/4.73.1/lib/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll
  microsoft.identity.client/4.73.1/lib/net8.0/Microsoft.Identity.Client.dll
- microsoft.identitymodel.abstractions/7.7.1/lib/net8.0/Microsoft.IdentityModel.Abstractions.dll
- microsoft.identitymodel.jsonwebtokens/7.7.1/lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
- microsoft.identitymodel.logging/7.7.1/lib/net8.0/Microsoft.IdentityModel.Logging.dll
+ microsoft.identitymodel.abstractions/8.18.0/lib/net10.0/Microsoft.IdentityModel.Abstractions.dll
+ microsoft.identitymodel.jsonwebtokens/8.18.0/lib/net10.0/Microsoft.IdentityModel.JsonWebTokens.dll
+ microsoft.identitymodel.logging/8.18.0/lib/net10.0/Microsoft.IdentityModel.Logging.dll
  microsoft.identitymodel.protocols.openidconnect/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
  microsoft.identitymodel.protocols/7.7.1/lib/net8.0/Microsoft.IdentityModel.Protocols.dll
- microsoft.identitymodel.tokens/7.7.1/lib/net8.0/Microsoft.IdentityModel.Tokens.dll
+ microsoft.identitymodel.tokens/8.18.0/lib/net10.0/Microsoft.IdentityModel.Tokens.dll
+ microsoft.net.http.headers/2.3.0/lib/netstandard2.0/Microsoft.Net.Http.Headers.dll
  microsoft.sqlserver.server/1.0.0/lib/netstandard2.0/Microsoft.SqlServer.Server.dll
  system.clientmodel/1.5.1/lib/net8.0/System.ClientModel.dll
- system.identitymodel.tokens.jwt/7.7.1/lib/net8.0/System.IdentityModel.Tokens.Jwt.dll
+ system.identitymodel.tokens.jwt/8.18.0/lib/net10.0/System.IdentityModel.Tokens.Jwt.dll
  system.memory.data/8.0.1/lib/net8.0/System.Memory.Data.dll
  system.security.cryptography.pkcs/9.0.4/lib/net9.0/System.Security.Cryptography.Pkcs.dll
  system.security.cryptography.protecteddata/9.0.4/lib/net9.0/System.Security.Cryptography.ProtectedData.dll
+ system.security.cryptography.xml/8.0.2/lib/net8.0/System.Security.Cryptography.Xml.dll
 
 [analyzerReferences]
 <DOTNET>/packs/Microsoft.NETCore.App.Ref/10.0.2/analyzers/dotnet/cs/
