@@ -25,7 +25,8 @@ public class ProductCreatedConsumer : IConsumer<ProductCreatedEvent>
             Description = @event.Description,
             Price = @event.Price,
             CategoryId = @event.CategoryId,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            ImageUrl = @event.ImageUrl
         };
 
         await _writeToReadService.SyncProductToReadModelAsync(product);

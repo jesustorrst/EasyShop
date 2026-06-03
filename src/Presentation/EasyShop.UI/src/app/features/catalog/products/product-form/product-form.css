@@ -162,3 +162,36 @@ textarea {
   cursor: not-allowed;
   box-shadow: none;
 }
+.file-error-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fdf2f2;
+  border: 1px solid #f8b4b4;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  color: #9b1c1c;
+  font-size: 0.875rem;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.error-icon {
+  font-size: 1.1rem;
+}
+
+.error-text {
+  margin: 0;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

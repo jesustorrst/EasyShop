@@ -1,0 +1,30 @@
+@if (notificationServiceObj().show) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div
+      class="modal-box"
+      [ngClass]="notificationServiceObj().type"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-header">
+        <div class="icon-circle">
+          @if (notificationServiceObj().type === 'success') {
+            <i class="fa-solid fa-check"></i>
+          } @else if (notificationServiceObj().type === 'error') {
+            <i class="fa-solid fa-xmark"></i>
+          } @else {
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          }
+        </div>
+        <h3>{{ notificationServiceObj().title }}</h3>
+      </div>
+
+      <div class="modal-body">
+        <p>{{ notificationServiceObj().message }}</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-confirm" (click)="closeModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+}

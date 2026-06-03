@@ -22,7 +22,6 @@ public class CatalogDbContext : DbContext
 
             entity.HasKey(c => c.Id);
 
-            // Propiedades
             entity.Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(50);

@@ -24,7 +24,8 @@ public class GetProductListHandler : IRequestHandler<GetProductListQuery, List<P
             Description = p.Description,
             Price = p.Price,
             CategoryId = p.CategoryId,
-            CategoryName = p.Category?.Name ?? string.Empty
+            CategoryName = p.Category?.Name ?? string.Empty,
+            ImageUrl = p.ImageUrl,
         }).ToList();
     }
 }

@@ -1,3 +1,4 @@
+
 namespace EasyShop.Catalog.Application.DTOs;
 
 public class ProductDto
@@ -9,6 +10,7 @@ public class ProductDto
     public Guid CategoryId { get; set; }
 
     public string CategoryName { get; set; } = string.Empty;
+    public string ImageUrl { get; set; } = string.Empty;
 }
 
 
@@ -21,5 +23,8 @@ public class CreateProductDto
     public string Description { get; set; }
     public decimal Price { get; set; }
     public Guid CategoryId { get; set; }
+
+    public Stream? ImageStream { get; set; }
+    public string? ImageFileName { get; set; }
 }
 

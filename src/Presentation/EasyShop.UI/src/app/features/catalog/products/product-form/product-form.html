@@ -1,71 +1,142 @@
-<div class="form-container">
-  <header class="form-header">
-    <h2>Producto</h2>
-    <p>Ingresa los datos del producto</p>
-  </header>
+<div class="container my-5" style="max-width: 700px">
+  <div class="card shadow-sm border rounded-3 p-4 bg-white">
+    <header class="border-bottom pb-3 mb-4">
+      <h2 class="fw-bold text-dark m-0">
+        {{ isEditMode() ? 'Editar Producto' : 'Nuevo Producto' }}
+      </h2>
+      <p class="text-muted m-0 small">
+        Ingresa los datos correspondientes para la gestión en EasyShop
+      </p>
+    </header>
 
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="modern-form">
-    <div class="form-group">
-      <label for="name">Nombre</label>
-      <input id="name" formControlName="name" type="text" placeholder="Nombre del producto" />
-      <!-- <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
-                El nombre es requerido.
-            </div> -->
-      @if (isFieldInvalid('name')) {
-        <small class="error-message">El nombre es obligatorio (mínimo 3 caracteres).</small>
-      }
-    </div>
-
-    <div class="form-group">
-      <label for="description">Descripción</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        placeholder="Descripción del producto"
-      ></textarea>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="price">Precio (MXN) *</label>
-        <input
-          type="number"
-          id="price"
-          formControlName="price"
-          step="0.01"
-          [class.input-error]="isFieldInvalid('price')"
-        />
-        @if (isFieldInvalid('price')) {
-          <small class="error-message">El precio debe ser mayor a $0.00.</small>
-        }
-      </div>
-
-      <div class="form-group">
-        <label for="categoryId">Categoría *</label>
-        <select
-          id="categoryId"
-          formControlName="categoryId"
-          [class.input-error]="isFieldInvalid('categoryId')"
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3.5">
+        <label for="name" class="form-label fw-semibold text-secondary"
+          >Nombre del Producto *</label
         >
-          <option value="" disabled selected>Selecciona una categoría...</option>
-
-          @for (category of categories(); track category.id) {
-            <option [value]="category.id">{{ category.name }}</option>
-          }
-        </select>
-
-        @if (isFieldInvalid('categoryId')) {
-          <small class="error-message">Debes seleccionar una categoría válida.</small>
+        <input
+          id="name"
+          formControlName="name"
+          type="text"
+          class="form-control"
+          [class.is-invalid]="isFieldInvalid('name')"
+          placeholder="Ej. Silla Ergonómica Gamer"
+        />
+        @if (isFieldInvalid('name')) {
+          <div class="invalid-feedback">
+            El nombre es obligatorio (debe tener entre 3 y 100 caracteres).
+          </div>
         }
       </div>
-    </div>
 
-    <div class="form-actions">
-      <a routerLink="/catalogo/productos" class="btn-secondary">Cancelar</a>
-      <button type="submit" class="btn-primary" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'Guardando...' : 'Crear Producto' }}
-      </button>
-    </div>
-  </form>
-  <div></div>
+      <div class="mb-3.5">
+        <label for="description" class="form-label fw-semibold text-secondary">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          rows="3"
+          placeholder="Describe las características principales del artículo..."
+        ></textarea>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6">
+          <label for="price" class="form-label fw-semibold text-secondary">Precio (MXN) *</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input
+              type="number"
+              id="price"
+              formControlName="price"
+              step="0.01"
+              class="form-control"
+              [class.is-invalid]="isFieldInvalid('price')"
+              placeholder="0.00"
+            />
+            @if (isFieldInvalid('price')) {
+              <div class="invalid-feedback">El precio debe ser mayor o igual a $0.00.</div>
+            }
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="categoryId" class="form-label fw-semibold text-secondary">Categoría *</label>
+          <select
+            id="categoryId"
+            formControlName="categoryId"
+            class="form-select"
+            [class.is-invalid]="isFieldInvalid('categoryId')"
+          >
+            <option value="" disabled selected>Selecciona una categoría...</option>
+            @for (category of categories(); track category.id) {
+              <option [value]="category.id">{{ category.name }}</option>
+            }
+          </select>
+          @if (isFieldInvalid('categoryId')) {
+            <div class="invalid-feedback">Debes seleccionar una categoría válida.</div>
+          }
+        </div>
+      </div>
+
+      <div class="mb-4 p-3 bg-light rounded-3 border">
+        <label for="image" class="form-label fw-semibold text-dark">Imagen del Producto</label>
+        <input
+          type="file"
+          id="image"
+          (change)="onFileSelected($event)"
+          accept="image/jpeg, image/png, image/gif, image/webp"
+          class="form-control"
+          [class.is-invalid]="fileErrorMessage()"
+        />
+
+        @if (fileErrorMessage()) {
+          <div class="text-danger small mt-2 d-flex align-items-center gap-1">
+            <i class="bi bi-exclamation-triangle-fill"></i> {{ fileErrorMessage() }}
+          </div>
+        }
+
+        @if (imagePreview()) {
+          <div
+            class="mt-3 text-center border bg-white rounded-2 p-2 mx-auto"
+            style="max-width: 200px"
+          >
+            <p class="text-muted small mb-1.5 fw-medium">Vista previa:</p>
+            <img
+              [src]="imagePreview()"
+              alt="Vista previa"
+              class="img-thumbnail"
+              style="max-height: 150px; object-fit: contain"
+            />
+          </div>
+        }
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 border-top pt-3">
+        <a routerLink="/catalogo/productos" class="btn btn-outline-secondary px-4"> Cancelar </a>
+
+        <button
+          type="submit"
+          [class]="isEditMode() ? 'btn btn-primary px-4' : 'btn btn-success px-4'"
+          [disabled]="isSubmitting"
+        >
+          @if (isSubmitting) {
+            <span
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Guardando...
+          } @else {
+            <i
+              class="bi"
+              [class.bi-check-circle]="!isEditMode()"
+              [class.bi-pencil-square]="isEditMode()"
+            ></i>
+            {{ isEditMode() ? 'Guardar Cambios' : 'Crear Producto' }}
+          }
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

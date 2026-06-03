@@ -1,36 +1,44 @@
-<div class="list-container">
-  <header class="list-header">
-    <div class="header-title-container">
-      <h2>Catálogo de Productos</h2>
-      <p>Explora los productos disponibles en EasyShop</p>
+<div class="container py-5">
+  <div class="bg-white rounded-4 shadow-sm p-4 mb-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <h1 class="fw-bold mb-1">Catálogo de Productos</h1>
+
+        <p class="text-muted mb-0">Administra los productos disponibles en EasyShop</p>
+      </div>
+
+      <a routerLink="/catalogo/productos/add" class="btn btn-success btn-lg">
+        <i class="bi bi-plus-circle me-2"></i>
+        Nuevo Producto
+      </a>
     </div>
-    <a routerLink="/catalogo/productos/add" class="btn-add-product" title="Crear un nuevo producto">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="btn-icon"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-      </svg>
-      Agregar Producto
-    </a>
-  </header>
+  </div>
 
   @if (productService.loading()) {
-    <div class="loading-container">
-      <div class="spinner"></div>
-      <p>Cargando catálogo...</p>
+    <div class="text-center py-5">
+      <div
+        class="spinner-border text-primary"
+        style="width: 4rem; height: 4rem"
+        role="status"
+      ></div>
+
+      <h5 class="mt-4 text-muted">Cargando productos...</h5>
     </div>
   } @else {
-    <div class="products-grid">
+    <div class="row g-4">
       @for (item of productService.products(); track item.id) {
-        <app-product-card [product]="item" />
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <app-product-card [product]="item"> </app-product-card>
+        </div>
       } @empty {
-        <div class="empty-state">
-          <p>No se encontraron productos disponibles en este momento.</p>
+        <div class="col-12">
+          <div class="alert alert-light text-center border shadow-sm py-5">
+            <i class="bi bi-box-seam display-4 text-secondary"></i>
+
+            <h4 class="mt-3">No hay productos disponibles</h4>
+
+            <p class="text-muted mb-0">Agrega tu primer producto para comenzar.</p>
+          </div>
         </div>
       }
     </div>

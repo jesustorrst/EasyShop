@@ -41,11 +41,23 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [ServiceFilter(typeof(ValidarModeloFilter))]
-    public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] CreateProductDto createProductDto)
+    public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] CreateProductRequest createProductDto)
     {
-        var command = new CreateProductCommand(createProductDto);
+        var createProduct = new CreateProductDto
+        {
+            Name = createProductDto.Name,
+            Description = createProductDto.Description,
+            Price = createProductDto.Price,
+            CategoryId = createProductDto.CategoryId,
+            ImageStream = createProductDto.Image?.OpenReadStream(),
+            ImageFileName = createProductDto.Image?.FileName
+        };
+
+        var command = new CreateProductCommand(createProduct);
         var result = await _mediator.Send(command);
-        return CreatedAtAction(nameof(GetProducts), new { id = result.Id }, result);
+
+        return Ok(result);
+        // return CreatedAtAction(nameof(GetProducts), new { id = result.Id }, result);
     }
 
     [HttpGet("{id}")]
@@ -87,4 +99,15 @@ public class ProductController : ControllerBase
 
 
 
+
+}
+
+
+public class CreateProductRequest
+{
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public decimal Price { get; set; }
+    public Guid CategoryId { get; set; }
+    public IFormFile? Image { get; set; }
 }

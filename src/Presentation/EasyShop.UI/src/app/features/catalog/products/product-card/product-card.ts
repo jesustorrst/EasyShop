@@ -1,4 +1,5 @@
 import { Component, input, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Product } from '../../../../shared/models/product';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../../shared/services/product.service';
@@ -6,7 +7,7 @@ import { ProductService } from '../../../../shared/services/product.service';
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })
@@ -30,5 +31,10 @@ export class ProductCard {
         },
       });
     }
+  }
+
+  handleImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/images/default-product.png';
   }
 }

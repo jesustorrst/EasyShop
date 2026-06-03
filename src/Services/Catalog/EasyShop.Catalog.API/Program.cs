@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
-
+builder.Services.AddScoped<ValidarModeloFilter>();
 
 var secretKey = builder.Configuration["JwtSettings:Secret"]
     ?? throw new InvalidOperationException("La clave secreta del JWT no está configurada.");
@@ -33,6 +33,18 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
     };
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // El puerto donde corre tu Angular
+              .AllowAnyHeader()                     // Permite que Angular mande el Token JWT
+              .AllowAnyMethod();                    // Permite POST, GET, PUT, DELETE
+    });
+});
+// Program.cs (Capa API)
+var connectionString = builder.Configuration.GetConnectionString("AzureBlobStorage");
 
 var app = builder.Build();
 

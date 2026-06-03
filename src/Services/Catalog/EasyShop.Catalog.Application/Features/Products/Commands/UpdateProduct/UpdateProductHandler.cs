@@ -13,14 +13,18 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
     private readonly IProductReadRepository _readRepository;
     private readonly IPublishEndpoint _publishEndpoint;
 
+    private readonly IFileStorageService _fileStorageService;
+
     public UpdateProductHandler(
         IProductWriteRepository writeRepository,
+        IFileStorageService fileStorageService,
         IProductReadRepository readRepository,
         IPublishEndpoint publishEndpoint)
     {
         _writeRepository = writeRepository;
         _readRepository = readRepository;
         _publishEndpoint = publishEndpoint;
+        _fileStorageService = fileStorageService;
     }
 
     public async Task<ProductDto?> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -30,12 +34,36 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
         if (product == null)
             return null;
 
+        string oldImageUrl = product.ImageUrl;
+        string finalImageUrl = product.ImageUrl;
+
+        if (request.ProductDto.ImageStream != null && request.ProductDto.ImageFileName != null)
+        {
+            string uniqueFileName = $"{Guid.NewGuid()}_{request.ProductDto.ImageFileName}";
+
+            finalImageUrl = await _fileStorageService.UploadFileAsync(request.ProductDto.ImageStream, uniqueFileName, cancellationToken);
+
+            if (!string.IsNullOrEmpty(oldImageUrl))
+            {
+                try
+                {
+                    string oldFileName = Path.GetFileName(new Uri(oldImageUrl).LocalPath);
+                    await _fileStorageService.DeleteFileAsync(oldFileName, cancellationToken);
+                }
+                catch
+                {
+                }
+            }
+        }
+
         product.Name = request.ProductDto.Name;
         product.Description = request.ProductDto.Description;
         product.Price = request.ProductDto.Price;
         product.CategoryId = request.ProductDto.CategoryId;
         product.UpdatedAt = DateTime.UtcNow;
+        product.ImageUrl = finalImageUrl;
 
+        //mongo
         await _writeRepository.UpdateAsync(product, request.Id);
 
         var @event = new ProductUpdatedEvent
@@ -44,7 +72,9 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryId = product.CategoryId
+            CategoryId = product.CategoryId,
+            ImageUrl = product.ImageUrl
+
         };
 
         await _publishEndpoint.Publish(@event, cancellationToken);
@@ -55,7 +85,8 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryId = product.CategoryId
+            CategoryId = product.CategoryId,
+            ImageUrl = product.ImageUrl
         };
     }
 }

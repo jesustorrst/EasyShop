@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MassTransit;
 using EasyShop.Catalog.Application.Features.Products.EventConsumers;
+using Azure.Storage.Blobs;
 
 namespace EasyShop.Catalog.Infrastructure;
 
@@ -16,6 +17,13 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+
+        var azureConnectionString = configuration.GetConnectionString("AzureBlobStorage")
+            ?? throw new InvalidOperationException("Falta la configuración de Azure Blob Storage en el appsettings.");
+
+        services.AddSingleton(x => new BlobServiceClient(azureConnectionString));
+
+
         services.AddDbContext<CatalogDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("CatalogConnectionString")));
 
@@ -57,6 +65,8 @@ public static class InfrastructureServiceRegistration
                 cfg.ConfigureEndpoints(context);
             });
         });
+
+        services.AddScoped<IFileStorageService, AzureBlobStorageService>();
 
 
         return services;

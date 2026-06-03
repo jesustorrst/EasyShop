@@ -7,11 +7,12 @@ public class Product
     public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
-    public int Stock { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
 
     public Guid CategoryId { get; set; }
     public virtual Category Category { get; set; } = null!;
+
+    public int Stock { get; set; }
 }

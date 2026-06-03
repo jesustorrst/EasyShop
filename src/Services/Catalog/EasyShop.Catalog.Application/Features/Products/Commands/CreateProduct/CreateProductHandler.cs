@@ -10,17 +10,23 @@ namespace EasyShop.Catalog.Application.Features.Products.Commands.CreateProduct;
 public class CreateProductHandler : IRequestHandler<CreateProductCommand, ProductDto>
 {
     private readonly IProductWriteRepository _writeRepository;
+    private readonly IFileStorageService _fileStorageService;
     private readonly IPublishEndpoint _publishEndpoint;
 
 
-    public CreateProductHandler(IProductWriteRepository writeRepository, IPublishEndpoint publishEndpoint)
+    public CreateProductHandler(IProductWriteRepository writeRepository, IFileStorageService fileStorageService, IPublishEndpoint publishEndpoint)
     {
         _writeRepository = writeRepository;
+        _fileStorageService = fileStorageService;
         _publishEndpoint = publishEndpoint;
     }
 
     public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
+        var dto = request.ProductDto;
+
+        string dbImageUrl = await _fileStorageService.UploadFileAsync(dto.ImageStream!, dto.ImageFileName!, cancellationToken);
+
         var product = new Product
         {
             Id = Guid.NewGuid(),
@@ -28,6 +34,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Description = request.ProductDto.Description,
             Price = request.ProductDto.Price,
             CategoryId = request.ProductDto.CategoryId,
+            ImageUrl = dbImageUrl,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -39,7 +46,8 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryId = product.CategoryId
+            CategoryId = product.CategoryId,
+            ImageUrl = product.ImageUrl
         };
 
         await _publishEndpoint.Publish(@event, cancellationToken);
@@ -50,7 +58,10 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryId = product.CategoryId
+            CategoryId = product.CategoryId,
+            ImageUrl = product.ImageUrl
         };
     }
+
+
 }

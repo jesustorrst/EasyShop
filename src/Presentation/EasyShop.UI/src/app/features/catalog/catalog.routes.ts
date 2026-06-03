@@ -14,6 +14,11 @@ export const catalogRoutes: Routes = [
         loadComponent: () =>
           import('./products/product-form/product-form').then((m) => m.ProductForm),
       },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./products/product-form/product-form').then((m) => m.ProductForm),
+      },
     ],
   },
   // ,{
