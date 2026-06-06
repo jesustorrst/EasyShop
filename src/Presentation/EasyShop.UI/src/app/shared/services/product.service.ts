@@ -32,12 +32,11 @@ export class ProductService {
       });
   }
 
-  createProduct(product: Product, imageFile: File | null) {
-    this.#loading.set(true);
-
+  createFormProduct(product: Product, imageFile: File | null, id?: string): FormData {
     const formData = new FormData();
+
     formData.append('name', product.name);
-    formData.append('description', product.description);
+    formData.append('description', product.description || '');
     formData.append('price', product.price.toString());
     formData.append('categoryId', product.categoryId);
 
@@ -45,12 +44,32 @@ export class ProductService {
       formData.append('image', imageFile, imageFile.name);
     }
 
+    return formData;
+  }
+
+  createProduct(product: Product, imageFile: File | null): Observable<Product> {
+    this.#loading.set(true);
+
+    const formData = this.createFormProduct(product, imageFile);
+
     return this.http.post<Product>(`${this.baseUrl}/product`, formData).pipe(
       tap((newProduct) => {
-        console.log('📦 [Servicio Cache] Productos antes de actualizar:', this.#products());
-        console.log('✨ [Servicio Cache] Producto nuevo devuelto por .NET:', newProduct);
         this.#products.update((products) => [...products, newProduct]);
-        console.log('🚀 [Servicio Cache] Lista combinada final en memoria:', this.#products());
+      }),
+      finalize(() => this.#loading.set(false)),
+    );
+  }
+
+  updateProduct(id: string, product: Product, imageFile: File | null): Observable<Product> {
+    this.#loading.set(true);
+
+    const formData = this.createFormProduct(product, imageFile, id);
+
+    return this.http.put<Product>(`${this.baseUrl}/product/${id}`, formData).pipe(
+      tap((updatedProduct) => {
+        this.#products.update((products) =>
+          products.map((p) => (p.id === id ? updatedProduct : p)),
+        );
       }),
       finalize(() => this.#loading.set(false)),
     );

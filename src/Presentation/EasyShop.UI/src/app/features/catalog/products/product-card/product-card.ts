@@ -35,6 +35,6 @@ export class ProductCard {
 
   handleImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
-    target.src = 'assets/images/default-product.png';
+    target.src = 'images/default-product.png';
   }
 }

@@ -5,6 +5,7 @@
     <Project Path="src/Services/Catalog/EasyShop.Catalog.API/EasyShop.Catalog.API.csproj" />
     <Project Path="src/Services/Catalog/EasyShop.Catalog.Application/EasyShop.Catalog.Application.csproj" />
     <Project Path="src/Services/Catalog/EasyShop.Catalog.Domain/EasyShop.Catalog.Domain.csproj" />
+    <Project Path="src/Services/Catalog/EasyShop.Catalog.Functions/EasyShop.Catalog.Functions.csproj" />
     <Project Path="src/Services/Catalog/EasyShop.Catalog.Infrastructure/EasyShop.Catalog.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Services/Identity/">

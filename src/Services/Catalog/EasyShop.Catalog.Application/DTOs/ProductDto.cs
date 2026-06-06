@@ -24,7 +24,8 @@ public class CreateProductDto
     public decimal Price { get; set; }
     public Guid CategoryId { get; set; }
 
-    public Stream? ImageStream { get; set; }
+    public byte[]? ImageStream { get; set; }
     public string? ImageFileName { get; set; }
+    public string? ImageContentType { get; set; }
 }
 

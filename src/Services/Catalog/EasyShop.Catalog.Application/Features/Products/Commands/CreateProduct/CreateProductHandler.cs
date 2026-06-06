@@ -25,8 +25,9 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
     {
         var dto = request.ProductDto;
 
-        string dbImageUrl = await _fileStorageService.UploadFileAsync(dto.ImageStream!, dto.ImageFileName!, cancellationToken);
+        string dbImageUrl = await _fileStorageService.UploadFileAsync(dto.ImageStream!, dto.ImageFileName!, dto.ImageContentType!, cancellationToken);
 
+        string pureFileName = dbImageUrl.Split('/').Last();
         var product = new Product
         {
             Id = Guid.NewGuid(),
@@ -34,7 +35,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Description = request.ProductDto.Description,
             Price = request.ProductDto.Price,
             CategoryId = request.ProductDto.CategoryId,
-            ImageUrl = dbImageUrl,
+            ImageUrl = pureFileName,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -47,7 +48,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Description = product.Description,
             Price = product.Price,
             CategoryId = product.CategoryId,
-            ImageUrl = product.ImageUrl
+            ImageUrl = pureFileName
         };
 
         await _publishEndpoint.Publish(@event, cancellationToken);
@@ -59,7 +60,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
             Description = product.Description,
             Price = product.Price,
             CategoryId = product.CategoryId,
-            ImageUrl = product.ImageUrl
+            ImageUrl = _fileStorageService.GetSecureUrl(pureFileName, cancellationToken)
         };
     }
 

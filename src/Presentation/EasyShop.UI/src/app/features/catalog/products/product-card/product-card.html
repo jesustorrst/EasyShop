@@ -1,7 +1,7 @@
 <div class="card product-card h-100 border-0 shadow-sm">
   <div class="product-image-container">
     <img
-      [src]="product().imageUrl || 'images/default-product.png'"
+      [src]="product().imageUrl"
       class="product-image"
       [alt]="product().name || 'Producto por defecto'"
       (error)="handleImageError($event)"

@@ -92,10 +92,12 @@ export class ProductForm implements OnInit {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
 
-      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
       if (!validTypes.includes(file.type)) {
-        this.fileErrorMessage.set('Tipo de archivo no válido. Solo se permiten JPEG, PNG y GIF.');
+        this.fileErrorMessage.set(
+          'Tipo de archivo no válido. Solo se permiten JPEG, PNG, GIF y WEBP.',
+        );
         this.resetImageInput(input);
         return;
       }
@@ -133,14 +135,28 @@ export class ProductForm implements OnInit {
 
     const productData = this.productForm.value;
 
-    this.productService.createProduct(productData, this.imageSelected()).subscribe({
-      next: () => {
-        this.router.navigate(['/catalog/products']);
-      },
-      error: (error) => {
-        console.error('Error creating product:', error);
-        this.isSubmitting = false;
-      },
-    });
+    if (this.isEditMode()) {
+      this.productService
+        .updateProduct(this.productId()!, productData, this.imageSelected())
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/catalog/products']);
+          },
+          error: (error) => {
+            console.error('Error updating product:', error);
+            this.isSubmitting = false;
+          },
+        });
+    } else {
+      this.productService.createProduct(productData, this.imageSelected()).subscribe({
+        next: () => {
+          this.router.navigate(['/catalog/products']);
+        },
+        error: (error) => {
+          console.error('Error creating product:', error);
+          this.isSubmitting = false;
+        },
+      });
+    }
   }
 }

@@ -41,20 +41,33 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [ServiceFilter(typeof(ValidarModeloFilter))]
-    public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] CreateProductRequest createProductDto)
+    public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] CreateProductRequest createProductDto, CancellationToken cancellationToken)
     {
-        var createProduct = new CreateProductDto
+
+        byte[]? imageBytes = null;
+
+        if (createProductDto.Image is not null)
+        {
+            using var ms = new MemoryStream();
+
+            await createProductDto.Image.CopyToAsync(ms, cancellationToken);
+
+            imageBytes = ms.ToArray();
+        }
+
+        CreateProductDto createProduct = new CreateProductDto
         {
             Name = createProductDto.Name,
             Description = createProductDto.Description,
             Price = createProductDto.Price,
             CategoryId = createProductDto.CategoryId,
-            ImageStream = createProductDto.Image?.OpenReadStream(),
-            ImageFileName = createProductDto.Image?.FileName
+            ImageStream = imageBytes,
+            ImageFileName = createProductDto.Image?.FileName,
+            ImageContentType = createProductDto.Image?.ContentType
         };
 
         var command = new CreateProductCommand(createProduct);
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command, cancellationToken);
 
         return Ok(result);
         // return CreatedAtAction(nameof(GetProducts), new { id = result.Id }, result);
@@ -73,10 +86,32 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<ProductDto>> UpdateProduct(Guid id, [FromBody] CreateProductDto updateProductDto)
+    public async Task<ActionResult<ProductDto>> UpdateProduct(Guid id, [FromForm] CreateProductRequest updateProductDto, CancellationToken cancellationToken)
     {
-        var command = new UpdateProductCommand(id, updateProductDto);
-        var result = await _mediator.Send(command);
+        byte[]? imageBytes = null;
+
+        if (updateProductDto.Image is not null)
+        {
+            using var ms = new MemoryStream();
+
+            await updateProductDto.Image.CopyToAsync(ms, cancellationToken);
+
+            imageBytes = ms.ToArray();
+        }
+
+        CreateProductDto updateProduct = new CreateProductDto
+        {
+            Name = updateProductDto.Name,
+            Description = updateProductDto.Description,
+            Price = updateProductDto.Price,
+            CategoryId = updateProductDto.CategoryId,
+            ImageStream = imageBytes,
+            ImageFileName = updateProductDto.Image?.FileName,
+            ImageContentType = updateProductDto.Image?.ContentType
+        };
+
+        var command = new UpdateProductCommand(id, updateProduct);
+        var result = await _mediator.Send(command, cancellationToken);
 
         if (result == null)
             return NotFound();

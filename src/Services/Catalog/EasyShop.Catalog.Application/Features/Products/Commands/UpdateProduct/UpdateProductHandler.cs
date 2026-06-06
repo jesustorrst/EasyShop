@@ -41,7 +41,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Produc
         {
             string uniqueFileName = $"{Guid.NewGuid()}_{request.ProductDto.ImageFileName}";
 
-            finalImageUrl = await _fileStorageService.UploadFileAsync(request.ProductDto.ImageStream, uniqueFileName, cancellationToken);
+            finalImageUrl = await _fileStorageService.UploadFileAsync(request.ProductDto.ImageStream, uniqueFileName, request.ProductDto.ImageContentType!, cancellationToken);
 
             if (!string.IsNullOrEmpty(oldImageUrl))
             {

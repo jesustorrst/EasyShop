@@ -2,7 +2,7 @@ bin/
 obj/
 *.user
 .vs/
-.vscode/
+
 appsettings.Development.json
 Debug/
 Release/

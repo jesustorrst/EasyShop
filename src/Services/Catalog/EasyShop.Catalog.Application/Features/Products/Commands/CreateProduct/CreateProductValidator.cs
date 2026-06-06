@@ -35,55 +35,55 @@ public class CreateProductValidator : AbstractValidator<CreateProductCommand>
             .NotEmpty().WithMessage("CategoryId es requerido")
             .MustAsync(CategoryExistsAsync).WithMessage("La categoría especificada no existe");
 
-        RuleFor(p => p.ProductDto.ImageStream)
-            .Must(HaveValidSize).WithMessage("La imagen no puede exceder 2MB")
-            .Must(BeValidExtension).WithMessage("El archivo debe ser una imagen válida (JPEG, PNG, WEBP)")
-            .When(p => p.ProductDto.ImageStream != null);
+        // RuleFor(p => p.ProductDto.ImageStream)
+        //     // .Must(HaveValidSize).WithMessage("La imagen no puede exceder 2MB")
+        //     // .Must(BeValidExtension).WithMessage("El archivo debe ser una imagen válida (JPEG, PNG, WEBP)")
+        //     .When(p => p.ProductDto.ImageStream != null);
 
     }
 
-    private bool HaveValidSize(Stream imageStream)
-    {
-        if (imageStream == null)
-        {
-            return true;
-        }
+    // private bool HaveValidSize(byte[] imageStream)
+    // {
+    //     if (imageStream == null)
+    //     {
+    //         return true;
+    //     }
 
-        const long maxSizeBytes = 2 * 1024 * 1024;
-        return imageStream.Length <= maxSizeBytes;
-    }
+    //     const long maxSizeBytes = 2 * 1024 * 1024;
+    //     return imageStream.Length <= maxSizeBytes;
+    // }
 
-    private bool BeValidExtension(Stream imageStream)
-    {
-        if (imageStream == null)
-        {
-            return true;
-        }
+    // private bool BeValidExtension(byte[] imageStream)
+    // {
+    //     if (imageStream == null)
+    //     {
+    //         return true;
+    //     }
 
-        try
-        {
-            using var reader = new BinaryReader(imageStream);
+    //     try
+    //     {
+    //         using var reader = new BinaryReader(new MemoryStream(imageStream));
 
-            var headerBytes = reader.ReadBytes(8);
+    //         var headerBytes = reader.ReadBytes(8);
 
-            imageStream.Position = 0;
+    //         imageStream.Position = 0;
 
-            foreach (var signature in _imageSignatures.Values)
-            {
-                if (headerBytes.Take(signature.Length).SequenceEqual(signature))
-                {
-                    return true;
-                }
-            }
+    //         foreach (var signature in _imageSignatures.Values)
+    //         {
+    //             if (headerBytes.Take(signature.Length).SequenceEqual(signature))
+    //             {
+    //                 return true;
+    //             }
+    //         }
 
-            return false;
-        }
-        catch
-        {
-            return false;
-        }
+    //         return false;
+    //     }
+    //     catch
+    //     {
+    //         return false;
+    //     }
 
-    }
+    // }
 
     private async Task<bool> CategoryExistsAsync(Guid categoryId, CancellationToken cancellationToken)
     {
